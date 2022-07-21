@@ -1,10 +1,20 @@
 const http = require("http");
-const fs = require("fs/promises");
+const fs = require("fs");
 
-const server = http.createServer((req, res) => {
-	res.statusCode = 200;
-	res.setHeader("ContentType", "text/html");
-	res.end();
+const server = http.createServer(async (req, res) => {
+	res.setHeader("Content-Type", "text/html");
+	console.log(req.url);
+	if (req.url === "/") {
+		fs.readFile("index.html", "utf8", (error, data) => {
+			if (error) {
+				console.log(error);
+				return;
+			}
+			res.end(data);
+		});
+	} else {
+		res.end("ending");
+	}
 });
 
 server.listen(8080);
