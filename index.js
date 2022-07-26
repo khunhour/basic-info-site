@@ -12,6 +12,14 @@ const server = http.createServer(async (req, res) => {
 			}
 			res.end(data);
 		});
+	} else if (req.url === "/contact-me") {
+		fs.readFile("contact-me.html", "utf8", (error, data) => {
+			if (error) {
+				console.log(error);
+				return;
+			}
+			res.end(end);
+		});
 	} else {
 		res.end("ending");
 	}
