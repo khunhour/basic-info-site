@@ -29,7 +29,14 @@ const server = http.createServer(async (req, res) => {
 			res.end(end);
 		});
 	} else {
-		res.end("ending");
+		// display 404 file
+		fs.readFile("404.html", "utf8", (error, data) => {
+			if (error) {
+				console.log(error);
+				return;
+			}
+			res.end(end);
+		});
 	}
 });
 
