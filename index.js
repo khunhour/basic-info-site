@@ -18,7 +18,7 @@ const server = http.createServer(async (req, res) => {
 				console.log(error);
 				return;
 			}
-			res.end(end);
+			res.end(data);
 		});
 	} else if (req.url === "/about") {
 		fs.readFile("about.html", "utf8", (error, data) => {
@@ -26,7 +26,7 @@ const server = http.createServer(async (req, res) => {
 				console.log(error);
 				return;
 			}
-			res.end(end);
+			res.end(data);
 		});
 	} else {
 		// display 404 file
@@ -35,7 +35,7 @@ const server = http.createServer(async (req, res) => {
 				console.log(error);
 				return;
 			}
-			res.end(end);
+			res.end(data);
 		});
 	}
 });
