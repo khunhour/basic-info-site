@@ -20,6 +20,14 @@ const server = http.createServer(async (req, res) => {
 			}
 			res.end(end);
 		});
+	} else if (req.url === "/about") {
+		fs.readFile("about.html", "utf8", (error, data) => {
+			if (error) {
+				console.log(error);
+				return;
+			}
+			res.end(end);
+		});
 	} else {
 		res.end("ending");
 	}
