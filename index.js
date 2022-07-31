@@ -3,7 +3,6 @@ const fs = require("fs");
 
 const server = http.createServer(async (req, res) => {
 	res.setHeader("Content-Type", "text/html");
-	console.log(req.url);
 	if (req.url === "/") {
 		fs.readFile("index.html", "utf8", (error, data) => {
 			if (error) {
