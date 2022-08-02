@@ -1,42 +1,23 @@
-const http = require("http");
-const fs = require("fs");
+const express = require("express");
+const app = express();
+const port = 8080;
 
-const server = http.createServer(async (req, res) => {
-	res.setHeader("Content-Type", "text/html");
-	if (req.url === "/") {
-		fs.readFile("index.html", "utf8", (error, data) => {
-			if (error) {
-				console.log(error);
-				return;
-			}
-			res.end(data);
-		});
-	} else if (req.url === "/contact-me") {
-		fs.readFile("contact-me.html", "utf8", (error, data) => {
-			if (error) {
-				console.log(error);
-				return;
-			}
-			res.end(data);
-		});
-	} else if (req.url === "/about") {
-		fs.readFile("about.html", "utf8", (error, data) => {
-			if (error) {
-				console.log(error);
-				return;
-			}
-			res.end(data);
-		});
-	} else {
-		// display 404 file
-		fs.readFile("404.html", "utf8", (error, data) => {
-			if (error) {
-				console.log(error);
-				return;
-			}
-			res.end(data);
-		});
-	}
+app.get("/", (req, res) => {
+	res.sendFile("./index.html", { root: __dirname });
 });
 
-server.listen(8080);
+app.get("/about", (req, res) => {
+	res.sendFile("./about.html", { root: __dirname });
+});
+
+app.get("/contact-me", (req, res) => {
+	res.sendFile("./contact-me.html", { root: __dirname });
+});
+
+app.use((req, res) => {
+	res.status(404).sendFile("./404.html", { root: __dirname });
+});
+
+app.listen(port, () => {
+	console.log("Listening on port " + port);
+});
